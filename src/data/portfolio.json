@@ -1,0 +1,238 @@
+{
+  "profile": {
+    "image": "/portfolio-assets/profile-1.jpg",
+    "images": [
+      "/portfolio-assets/profile-1.jpeg",
+      "/portfolio-assets/profile-2.jpeg",
+      "/portfolio-assets/profile-3.jpg"
+    ],
+    "traits": "Full-stack engineer • Backend specialist • Product-focused developer • Workflow optimizer",
+    "aboutMeHtml": "<p>I’m a Nigerian full-stack software engineer focused on building scalable business applications, financial systems, internal tools, and modern digital products. My strongest areas are <strong>Django, React, Flutter, APIs, backend architecture, and product workflow design</strong>.</p><p>I enjoy turning complex operational problems into systems that are simple to use, maintainable for teams, and reliable in production. Most of my work sits at the intersection of product thinking, backend engineering, automation, and user experience.</p><p>I’ve worked on investment platforms, savings and loan systems, CMS architectures, mobile applications, internal business dashboards, and deployment infrastructure. I care a lot about clean architecture, continuity, performance, and building products that businesses can actually grow with.</p>",
+    "technologies": [
+      "ReactJS",
+      "TypeScript",
+      "Flutter",
+      "React Native",
+      "Django",
+      "Django Ninja",
+      "Django CMS",
+      "Python",
+      "Node.js",
+      "ExpressJS",
+      "REST APIs",
+      "PostgreSQL",
+      "MySQL",
+      "Nginx",
+      "Gunicorn",
+      "Docker",
+      "Automation"
+    ]
+  },
+  "sections": [
+    { "title": "ReactJS" },
+    { "title": "TypeScript" },
+    { "title": "Django" },
+    { "title": "Backend Systems" },
+    { "title": "Flutter" },
+    { "title": "React Native"}
+  ],
+  "projects": [
+
+    {
+      "projectTitle": "Document Management System",
+      "sections": ["Django", "Pyantic", "Django Ninja","Backend Systems"],
+      "link": "https://dms-api.apps.ginnsltd.com/v1/docs",
+      "summary": "Reusable CMS-driven frontend components with configurable content blocks, dynamic layouts, scoped styling, FAQs, pricing sections, testimonials, and flexible content management for non-technical teams.",
+      "year": "2024",
+      "assets": [
+        {
+          "url": "/portfolio-assets/dms_1.mp4",
+          "type": "video",
+          "alt": "Django API"
+        },
+        {
+          "url": "/portfolio-assets/dms_2.mp4",
+          "type": "video",
+          "alt": "Django API"
+        },
+        {
+          "url": "/portfolio-assets/dms_3.png",
+          "type": "image",
+          "alt": "Django API"
+        },
+        {
+          "url": "/portfolio-assets/dms_4.png",
+          "type": "image",
+          "alt": "Django API"
+        },
+        {
+          "url": "/portfolio-assets/dms_5.png",
+          "type": "image",
+          "alt": "Django API"
+        }
+      ]
+    },
+    {
+      "projectTitle": "Estefarya",
+      "sections": ["Django", "Django CMS"],
+      "link": "https://estefarya.com/en/",
+      "summary": "Reusable CMS-driven frontend components with configurable content blocks, dynamic layouts, scoped styling, FAQs, pricing sections, testimonials, and flexible content management for non-technical teams.",
+      "year": "2025",
+      "assets": [
+        {
+          "url": "/portfolio-assets/Estefarya_1.mp4",
+          "type": "video",
+          "alt": "Django CMS components"
+        },
+        {
+          "url": "/portfolio-assets/Estefarya_2.mp4",
+          "type": "video",
+          "alt": "Django CMS components"
+        },
+        {
+          "url": "/portfolio-assets/Estefarya_3.png",
+          "type": "image",
+          "alt": "Django CMS components"
+        },
+        {
+          "url": "/portfolio-assets/Estefarya_4.png",
+          "type": "image",
+          "alt": "Django CMS components"
+        }
+      ]
+    },
+
+    {
+      "projectTitle": "Bulqe/IDMC",
+      "sections": ["ReactJS", "TypeScript"],
+      "link": "https://app.idmc.ai/",
+      "summary": "A marketplace platform for renting musical instruments with inventory management, product listings, booking workflows, customer interactions, and payment-ready architecture.",
+      "year": "2026",
+      "assets": [
+        {
+          "url": "/portfolio-assets/idmc_1.mp4",
+          "type": "video",
+          "alt": "IDMC/Bulqe ReactJS frontend"
+        },
+        {
+          "url": "/portfolio-assets/idmc_2.png",
+          "type": "image",
+          "alt": "IDMC/Bulqe ReactJS frontend"
+        },
+        {
+          "url": "/portfolio-assets/idmc_3.png",
+          "type": "image",
+          "alt": "IDMC/Bulqe ReactJS frontend"
+        }
+      ]
+    },
+    {
+      "projectTitle": "WWPC",
+      "sections": ["React Native", "TypeScript"],
+      "link": "",
+      "summary": "A marketplace platform for renting musical instruments with inventory management, product listings, booking workflows, customer interactions, and payment-ready architecture.",
+      "year": "2025",
+      "assets": [
+        {
+          "url": "/portfolio-assets/WWPC_1.mp4",
+          "type": "video",
+          "alt": "WWPC Mobile"
+        },
+        {
+          "url": "/portfolio-assets/WWPC_2.mp4",
+          "type": "video",
+          "alt": "WWPC Mobile"
+        },
+        {
+          "url": "/portfolio-assets/WWPC_3.mp4",
+          "type": "video",
+          "alt": "WWPC Mobile"
+        },
+        {
+          "url": "/portfolio-assets/WWPC_4.jpg",
+          "type": "image",
+          "alt": "WWPC Mobile"
+        },
+        {
+          "url": "/portfolio-assets/WWPC_5.jpg",
+          "type": "image",
+          "alt": "WWPC Mobile"
+        },
+        {
+          "url": "/portfolio-assets/WWPC_6.jpg",
+          "type": "image",
+          "alt": "WWPC Mobile"
+        }
+        
+      ]
+    },
+    {
+      "projectTitle": "Elevate",
+      "sections": ["Flutter"],
+      "link": "",
+      "summary": "A marketplace platform for renting musical instruments with inventory management, product listings, booking workflows, customer interactions, and payment-ready architecture.",
+      "year": "2024",
+      "assets": [
+        {
+          "url": "/portfolio-assets/Elevate_1.jpg",
+          "type": "image",
+          "alt": "Elevate Mobile and API"
+        },
+        {
+          "url": "/portfolio-assets/Elevate_2.mp4",
+          "type": "video",
+          "alt": "Elevate Mobile and API"
+        },
+        {
+          "url": "/portfolio-assets/Elevate_3.mp4",
+          "type": "video",
+          "alt": "Elevate Mobile and API"
+        },
+        {
+          "url": "/portfolio-assets/Elevate_4.jpg",
+          "type": "image",
+          "alt": "Elevate Mobile and API"
+        },
+        {
+          "url": "/portfolio-assets/Elevate_5.jpg",
+          "type": "image",
+          "alt": "Elevate Mobile and API"
+        },
+        {
+          "url": "/portfolio-assets/Elevate_6.jpg",
+          "type": "image",
+          "alt": "Elevate Mobile and API"
+        },
+        {
+          "url": "/portfolio-assets/Elevate_7.jpg",
+          "type": "image",
+          "alt": "Elevate Mobile and API"
+        }
+        
+      ]
+    }
+  ],
+  "gallery": [
+  {
+    "url": "/portfolio-assets/Gallery_1.JPG",
+    "type": "image",
+    "alt": "Fun times",
+    "title": "Perspective & Perseverance",
+    "caption": "Finding balance and fresh perspectives on the trails. I find that long hikes are a lot like coding—success is all about pacing and persistence."
+  },
+  {
+    "url": "/portfolio-assets/Gallery_2.JPG",
+    "type": "image",
+    "alt": "Got my NYSC certificate",
+    "title": "National Service Milestone",
+    "caption": "Successfully completing my service year. A rewarding experience focused on community impact, discipline, and professional growth."
+  },
+  {
+    "url": "/portfolio-assets/Gallery_3.mp4",
+    "type": "video",
+    "alt": "It's  new year",
+    "title": "New Beginnings",
+    "caption": "Celebrating traditions and looking forward to new technical challenges. I value these moments of community and shared goals."
+  }
+]
+}

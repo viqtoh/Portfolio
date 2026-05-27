@@ -1,0 +1,15 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="54" fill="#052E16"/>
+  <circle cx="210" cy="380" r="112" fill="#10B981"/>
+  <circle cx="600" cy="380" r="142" fill="#F59E0B"/>
+  <circle cx="990" cy="380" r="112" fill="#8B5CF6"/>
+  <path d="M322 380H458" stroke="#F8FAFC" stroke-width="22" stroke-linecap="round"/>
+  <path d="M742 380H878" stroke="#F8FAFC" stroke-width="22" stroke-linecap="round"/>
+  <rect x="120" y="580" width="960" height="74" rx="30" fill="#F8FAFC"/>
+  <rect x="170" y="604" width="170" height="26" rx="13" fill="#052E16"/>
+  <rect x="420" y="604" width="360" height="26" rx="13" fill="#94A3B8"/>
+  <rect x="860" y="604" width="150" height="26" rx="13" fill="#052E16"/>
+  <text x="210" y="397" text-anchor="middle" font-family="Arial" font-size="44" font-weight="800" fill="#052E16">APP</text>
+  <text x="600" y="397" text-anchor="middle" font-family="Arial" font-size="48" font-weight="800" fill="#052E16">API</text>
+  <text x="990" y="397" text-anchor="middle" font-family="Arial" font-size="44" font-weight="800" fill="#F8FAFC">ODOO</text>
+</svg>
