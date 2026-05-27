@@ -194,6 +194,7 @@ pre {
   border-radius: var(--radius-lg);
   background: var(--panel);
   box-shadow: var(--shadow);
+  /* min-height: 427px; */
 }
 
 .about-card p {
@@ -1661,4 +1662,77 @@ pre {
 
 .gallery-lightbox-panel .media-lightbox-stage video.media-asset {
   background: black;
+}
+
+.typewriter-html {
+  position: relative;
+}
+
+.typewriter-stage {
+  position: relative;
+}
+
+.typewriter-measure {
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.typewriter-visible {
+  position: absolute;
+  inset: 0;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 4px;
+  background: var(--accent);
+  vertical-align: -0.14em;
+}
+
+.typewriter-cursor.is-typing {
+  animation: typingCursorBlink 750ms steps(2, start) infinite;
+}
+
+.typewriter-cursor.is-finished {
+  opacity: 0.55;
+  animation: typingCursorBlink 1100ms steps(2, start) infinite;
+}
+
+@keyframes typingCursorBlink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+
+  46%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-cursor {
+    display: none;
+  }
+}
+
+@keyframes typingCursorBlink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+
+  46%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-visible::after {
+    display: none;
+  }
 }

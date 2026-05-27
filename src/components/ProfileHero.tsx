@@ -1,11 +1,12 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ProfileData } from '../types';
+import {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {ProfileData} from "../types";
+import {TypewriterHtml} from "./TypewriterHtml";
 
 interface ProfileHeroProps {
   profile: ProfileData;
 }
 
-export function ProfileHero({ profile }: ProfileHeroProps) {
+export function ProfileHero({profile}: ProfileHeroProps) {
   const profileImages = useMemo(() => {
     const images = profile.images?.filter(Boolean) ?? [];
     return images.length > 0 ? images : [profile.image].filter(Boolean);
@@ -18,7 +19,7 @@ export function ProfileHero({ profile }: ProfileHeroProps) {
   const boostTimerRef = useRef<number | null>(null);
   const scheduleAutoSwitchRef = useRef<(delay?: number) => void>(() => {});
 
-  const imageSignature = profileImages.join('|');
+  const imageSignature = profileImages.join("|");
   const currentImage = profileImages[activeImageIndex] ?? profileImages[0];
 
   const clearAutoTimer = useCallback(() => {
@@ -66,7 +67,7 @@ export function ProfileHero({ profile }: ProfileHeroProps) {
         scheduleAutoSwitchRef.current(5000);
       }, delay);
     },
-    [clearAutoTimer, profileImages.length, switchToNextImage],
+    [clearAutoTimer, profileImages.length, switchToNextImage]
   );
 
   useEffect(() => {
@@ -103,9 +104,11 @@ export function ProfileHero({ profile }: ProfileHeroProps) {
         <h1>Victor Aromiwe</h1>
         <p className="traits">{profile.traits}</p>
 
-        <div
+        <TypewriterHtml
           className="about-card"
-          dangerouslySetInnerHTML={{ __html: profile.aboutMeHtml }}
+          html={profile.aboutMeHtml}
+          speed={20}
+          startDelay={1500}
         />
 
         <div className="tech-cloud" aria-label="Technology stack">
@@ -116,12 +119,8 @@ export function ProfileHero({ profile }: ProfileHeroProps) {
       </div>
 
       <div className="hero-visual">
-        <div className={`portrait-ring ${isRingBoosted ? 'is-ring-boosted' : ''}`}>
-          <img
-            key={currentImage}
-            src={currentImage}
-            alt="Profile portrait"
-          />
+        <div className={`portrait-ring ${isRingBoosted ? "is-ring-boosted" : ""}`}>
+          <img key={currentImage} src={currentImage} alt="Profile portrait" />
 
           {profileImages.length > 1 && (
             <button
@@ -130,21 +129,21 @@ export function ProfileHero({ profile }: ProfileHeroProps) {
               onClick={handleManualImageSwitch}
               aria-label="Show next profile image"
             >
-             <svg 
-  viewBox="0 0 24 24" 
-  fill="none" 
-  stroke="currentColor" 
-  strokeWidth="2" 
-  strokeLinecap="round" 
-  strokeLinejoin="round"
-  aria-hidden="true"
->
-  <path d="M16 3h5v5" />
-  <path d="M4 20l17-17" />
-  <path d="M21 16v5h-5" />
-  <path d="M15 15l6 6" />
-  <path d="M4 4l5 5" />
-</svg>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M16 3h5v5" />
+                <path d="M4 20l17-17" />
+                <path d="M21 16v5h-5" />
+                <path d="M15 15l6 6" />
+                <path d="M4 4l5 5" />
+              </svg>
             </button>
           )}
         </div>

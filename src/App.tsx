@@ -59,20 +59,7 @@ export default function App() {
 
       <ProfileHero profile={portfolio.profile} />
 
-      <section className="stats-row" aria-label="Portfolio stats">
-        <div>
-          <strong>{totalProjects}</strong>
-          <span>Projects</span>
-        </div>
-        <div>
-          <strong>{totalSections}</strong>
-          <span>Sections</span>
-        </div>
-        <div>
-          <strong>{highlightedProjects.length}</strong>
-          <span>Cross-stack builds</span>
-        </div>
-      </section>
+    
 
       <SectionGroups
         sections={portfolio.sections}
