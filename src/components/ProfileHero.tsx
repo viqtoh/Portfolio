@@ -102,6 +102,39 @@ export function ProfileHero({profile}: ProfileHeroProps) {
       <div className="hero-copy">
         <span className="eyebrow">Welcome to my Portfolio</span>
         <h1>Victor Aromiwe</h1>
+        <div className="hero-visual Mshow">
+        <div className={`portrait-ring ${isRingBoosted ? "is-ring-boosted" : ""}`}>
+          <img key={currentImage} src={currentImage} alt="Profile portrait" />
+
+          {profileImages.length > 1 && (
+            <button
+              type="button"
+              className="portrait-switch-button"
+              onClick={handleManualImageSwitch}
+              aria-label="Show next profile image"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M16 3h5v5" />
+                <path d="M4 20l17-17" />
+                <path d="M21 16v5h-5" />
+                <path d="M15 15l6 6" />
+                <path d="M4 4l5 5" />
+              </svg>
+            </button>
+          )}
+        </div>
+
+        <div className="floating-note note-a">Strategy → UI → API → Deploy → Support</div>
+        <div className="floating-note note-b">Clean handover, scalable workflow</div>
+      </div>
         <p className="traits">{profile.traits}</p>
 
         <TypewriterHtml
@@ -118,7 +151,7 @@ export function ProfileHero({profile}: ProfileHeroProps) {
         </div>
       </div>
 
-      <div className="hero-visual">
+      <div className="hero-visual Dshow">
         <div className={`portrait-ring ${isRingBoosted ? "is-ring-boosted" : ""}`}>
           <img key={currentImage} src={currentImage} alt="Profile portrait" />
 

@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import type { CSSProperties } from 'react';
+import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
 import { PortfolioSection, ProjectData, ViewerMode } from '../types';
 import { MediaAsset } from './MediaAsset';
 import { ProjectMediaGallery } from './ProjectMediaGallery';
@@ -140,7 +139,30 @@ function BookViewer({
   const stageRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
 
+  const orderedProjects = useMemo(() => {
+    if (projects.length <= 1) return projects;
+
+    const safeInitialIndex = Math.min(
+      Math.max(initialIndex, 0),
+      projects.length - 1,
+    );
+
+    return [
+      ...projects.slice(safeInitialIndex),
+      ...projects.slice(0, safeInitialIndex),
+    ];
+  }, [projects, initialIndex]);
+
+  const projectCount = orderedProjects.length;
+  const hasMultipleProjects = projectCount > 1;
+  const transitionCount = Math.max(0, projectCount - 1);
+
   useEffect(() => {
+    if (!hasMultipleProjects) {
+      setProgress(0);
+      return;
+    }
+
     function updateProgress() {
       const node = stageRef.current;
       if (!node) return;
@@ -148,10 +170,12 @@ function BookViewer({
       const rect = node.getBoundingClientRect();
       const scrollableDistance = Math.max(1, rect.height - window.innerHeight);
       const passed = Math.min(Math.max(-rect.top, 0), scrollableDistance);
+
       setProgress(passed / scrollableDistance);
     }
 
     updateProgress();
+
     window.addEventListener('scroll', updateProgress, { passive: true });
     window.addEventListener('resize', updateProgress);
 
@@ -159,25 +183,66 @@ function BookViewer({
       window.removeEventListener('scroll', updateProgress);
       window.removeEventListener('resize', updateProgress);
     };
-  }, []);
+  }, [hasMultipleProjects]);
 
-  const segmentProgress = progress * projects.length;
-  const currentIndex = Math.min(projects.length - 1, Math.floor(segmentProgress));
-  const localProgress = currentIndex === projects.length - 1
-    ? clamp(segmentProgress - currentIndex)
-    : clamp(segmentProgress - currentIndex);
-  const nextIndex = (currentIndex + 1) % projects.length;
-  const current = projects[currentIndex] ?? projects[initialIndex] ?? projects[0];
-  const next = projects[nextIndex] ?? current;
+  if (projectCount === 0) {
+    return (
+      <div className="viewer-empty-state">
+        No projects available for {sectionTitle}.
+      </div>
+    );
+  }
 
-  const lift = clamp((localProgress - 0.08) / 0.2);
-  const turn = clamp((localProgress - 0.24) / 0.62) * -164;
+  if (!hasMultipleProjects) {
+    const onlyProject = orderedProjects[0];
+
+    return (
+      <div className="book-stage single-book-stage book-static-stage">
+        <div className="book-sticky">
+          <div
+            className="book-single-shell"
+            aria-label={`${sectionTitle} single project book viewer`}
+          >
+            <div className="book-stack-sheet sheet-a" />
+            <div className="book-stack-sheet sheet-b" />
+
+            <div className="book-single-page">
+              <ProjectPageContent
+                project={onlyProject}
+                label={`${sectionTitle} • Project 1 of 1`}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const segmentProgress = progress * transitionCount;
+  const transitionIndex = Math.min(
+    transitionCount - 1,
+    Math.floor(segmentProgress),
+  );
+
+  const localProgress = clamp(segmentProgress - transitionIndex);
+
+  const currentIndex = transitionIndex;
+  const nextIndex = transitionIndex + 1;
+
+  const current = orderedProjects[currentIndex];
+  const next = orderedProjects[nextIndex];
+
+  const lift = clamp((localProgress - 0.08) / 0.18);
+  const turnProgress = clamp((localProgress - 0.24) / 0.62);
+  const turn = turnProgress * -164;
 
   return (
     <div
       className="book-stage single-book-stage"
       ref={stageRef}
-      style={{ height: `${Math.max(230, projects.length * 92)}vh` }}
+      style={{
+        height: `calc(${130 + transitionCount * 115}svh)`,
+      }}
     >
       <div className="book-sticky">
         <div className="book-progress" aria-label="Book scroll progress">
@@ -187,27 +252,34 @@ function BookViewer({
         <div
           className="book-single-shell"
           aria-label={`${sectionTitle} single page book viewer`}
-          style={{ '--book-lift': lift, '--book-turn': `${turn}deg` } as CSSProperties}
+          style={
+            {
+              '--book-lift': lift,
+              '--book-turn-progress': turnProgress,
+              '--book-turn': `${turn}deg`,
+            } as CSSProperties
+          }
         >
           <div className="book-stack-sheet sheet-a" />
           <div className="book-stack-sheet sheet-b" />
 
-          <div className="book-single-next" aria-hidden={turn > -82 ? 'true' : 'false'}>
-            <ProjectPageContent project={next} label={`Next in ${sectionTitle}`} />
+          <div className="book-single-next">
+            <ProjectPageContent
+              project={next}
+              label={`${sectionTitle} • Project ${nextIndex + 1} of ${projectCount}`}
+            />
           </div>
 
-          <div
-            className={`book-single-page ${lift > 0 ? 'lifted' : ''}`}
-          >
+          <div className={`book-single-page ${lift > 0 ? 'lifted' : ''}`}>
             <ProjectPageContent
               project={current}
-              label={`${sectionTitle} • Project ${currentIndex + 1} of ${projects.length}`}
+              label={`${sectionTitle} • Project ${currentIndex + 1} of ${projectCount}`}
             />
           </div>
         </div>
 
         <p className="book-hint">
-          One-page book mode: scroll a little to lift the page, then continue scrolling to turn it into the next {sectionTitle} project.
+          Scroll to lift the page, then continue scrolling to reveal the next {sectionTitle} project.
         </p>
       </div>
     </div>
