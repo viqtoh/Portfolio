@@ -10,7 +10,14 @@ interface ProjectViewerProps {
 }
 
 const modeLabels: Record<ViewerMode, string> = {
-  book: 'Book turn',
+  book: 'Book Turn',
+  deck: 'Card deck',
+  orbit: 'Orbit map',
+  cinema: 'Cinema strip',
+};
+
+const modeLabels2: Record<ViewerMode, string> = {
+  book: 'Carousel',
   deck: 'Card deck',
   orbit: 'Orbit map',
   cinema: 'Cinema strip',
@@ -20,8 +27,31 @@ function clamp(value: number, min = 0, max = 1) {
   return Math.min(max, Math.max(min, value));
 }
 
+
+function useIsMobile(maxWidth = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(`(max-width: ${maxWidth}px)`);
+
+    function update() {
+      setIsMobile(mediaQuery.matches);
+    }
+
+    update();
+    mediaQuery.addEventListener('change', update);
+
+    return () => {
+      mediaQuery.removeEventListener('change', update);
+    };
+  }, [maxWidth]);
+
+  return isMobile;
+}
+
 export function ProjectViewer({ sections, projects, selectedProject }: ProjectViewerProps) {
   const [mode, setMode] = useState<ViewerMode>('book');
+  const isMobile = useIsMobile();
   const firstSectionWithProjects =
     sections.find((section) => projects.some((project) => project.sections.includes(section.title)))?.title ??
     sections[0]?.title ??
@@ -76,7 +106,18 @@ export function ProjectViewer({ sections, projects, selectedProject }: ProjectVi
         })}
       </div>
 
-      <div className="viewer-tabs" role="tablist" aria-label="Project viewer modes">
+      {isMobile ? <div className="viewer-tabs" role="tablist" aria-label="Project viewer modes">
+        {(Object.keys(modeLabels2) as ViewerMode[]).map((viewerMode) => (
+          <button
+            key={viewerMode}
+            type="button"
+            className={mode === viewerMode ? 'active' : ''}
+            onClick={() => setMode(viewerMode)}
+          >
+            {modeLabels2[viewerMode]}
+          </button>
+        ))}
+      </div>:<div className="viewer-tabs" role="tablist" aria-label="Project viewer modes">
         {(Object.keys(modeLabels) as ViewerMode[]).map((viewerMode) => (
           <button
             key={viewerMode}
@@ -87,7 +128,7 @@ export function ProjectViewer({ sections, projects, selectedProject }: ProjectVi
             {modeLabels[viewerMode]}
           </button>
         ))}
-      </div>
+      </div>}
 
       {projectsForActiveSection.length === 0 ? (
         <p className="empty-state viewer-empty-state">No projects found for {activeSectionTitle} yet.</p>
@@ -136,8 +177,12 @@ function BookViewer({
   initialIndex: number;
   sectionTitle: string;
 }) {
+
+  
   const stageRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
+
+  
 
   const orderedProjects = useMemo(() => {
     if (projects.length <= 1) return projects;
@@ -184,6 +229,18 @@ function BookViewer({
       window.removeEventListener('resize', updateProgress);
     };
   }, [hasMultipleProjects]);
+
+  const isMobile = useIsMobile(768);
+
+  if (isMobile) {
+    return (
+      <MobileBookViewer
+        projects={projects}
+        initialIndex={initialIndex}
+        sectionTitle={sectionTitle}
+      />
+    );
+  }
 
   if (projectCount === 0) {
     return (
@@ -282,6 +339,123 @@ function BookViewer({
           Scroll to lift the page, then continue scrolling to reveal the next {sectionTitle} project.
         </p>
       </div>
+    </div>
+  );
+}
+
+
+function MobileBookViewer({
+  projects,
+  initialIndex,
+  sectionTitle,
+}: {
+  projects: ProjectData[];
+  initialIndex: number;
+  sectionTitle: string;
+}) {
+  const [activeIndex, setActiveIndex] = useState(() => {
+    return Math.min(Math.max(initialIndex, 0), Math.max(projects.length - 1, 0));
+  });
+
+  const [direction, setDirection] = useState<1 | -1>(1);
+  const touchStartX = useRef<number | null>(null);
+
+  useEffect(() => {
+    setActiveIndex(
+      Math.min(Math.max(initialIndex, 0), Math.max(projects.length - 1, 0)),
+    );
+  }, [initialIndex, projects.length]);
+
+  if (projects.length === 0) {
+    return (
+      <div className="viewer-empty-state">
+        No projects available for {sectionTitle}.
+      </div>
+    );
+  }
+
+  const activeProject = projects[activeIndex];
+  const hasMultipleProjects = projects.length > 1;
+
+  function goToProject(nextIndex: number) {
+    if (!hasMultipleProjects) return;
+
+    const wrappedIndex = (nextIndex + projects.length) % projects.length;
+    setDirection(wrappedIndex > activeIndex || nextIndex === 0 ? 1 : -1);
+    setActiveIndex(wrappedIndex);
+  }
+
+  function handleTouchStart(event: React.TouchEvent<HTMLDivElement>) {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  }
+
+  function handleTouchEnd(event: React.TouchEvent<HTMLDivElement>) {
+    if (touchStartX.current === null) return;
+
+    const endX = event.changedTouches[0]?.clientX ?? touchStartX.current;
+    const diff = touchStartX.current - endX;
+
+    touchStartX.current = null;
+
+    if (Math.abs(diff) < 45) return;
+
+    if (diff > 0) {
+      goToProject(activeIndex + 1);
+    } else {
+      goToProject(activeIndex - 1);
+    }
+  }
+
+  return (
+    <div className="mobile-book-viewer">
+      <div className="mobile-book-topbar">
+        <span>{sectionTitle}</span>
+        <strong>
+          {activeIndex + 1} / {projects.length}
+        </strong>
+      </div>
+
+      <div
+        className={`mobile-book-card direction-${direction}`}
+        key={activeProject.projectTitle}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        <ProjectPageContent
+          project={activeProject}
+          label={`${sectionTitle} • Project ${activeIndex + 1} of ${projects.length}`}
+        />
+      </div>
+
+      {hasMultipleProjects && (
+        <>
+          <div className="mobile-book-controls">
+            <button type="button" onClick={() => goToProject(activeIndex - 1)}>
+              ‹
+            </button>
+
+            <div className="mobile-book-dots">
+              {projects.map((project, index) => (
+                <button
+                  key={`${project.projectTitle}-${index}`}
+                  type="button"
+                  className={index === activeIndex ? 'active' : ''}
+                  onClick={() => goToProject(index)}
+                  aria-label={`Show project ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            <button type="button" onClick={() => goToProject(activeIndex + 1)}>
+              ›
+            </button>
+          </div>
+
+          <p className="mobile-book-hint">
+            Swipe left or right to browse {sectionTitle} projects.
+          </p>
+        </>
+      )}
     </div>
   );
 }
