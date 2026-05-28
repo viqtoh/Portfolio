@@ -1975,4 +1975,7 @@ pre {
 #root{
   overflow-x: clip;
 }
+.viewer-tabs {
+    position: static;
+}
 }
