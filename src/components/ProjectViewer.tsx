@@ -1,5 +1,5 @@
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
-import { PortfolioSection, ProjectData, ViewerMode } from '../types';
+import { PortfolioSection, ProjectData, SuperViewerMode, ViewerMode } from '../types';
 import { MediaAsset } from './MediaAsset';
 import { ProjectMediaGallery } from './ProjectMediaGallery';
 
@@ -16,9 +16,8 @@ const modeLabels: Record<ViewerMode, string> = {
   cinema: 'Cinema strip',
 };
 
-const modeLabels2: Record<ViewerMode, string> = {
+const modeLabels2: Record<SuperViewerMode, string> = {
   book: 'Carousel',
-  deck: 'Card deck',
   orbit: 'Orbit map',
   cinema: 'Cinema strip',
 };
@@ -107,7 +106,7 @@ export function ProjectViewer({ sections, projects, selectedProject }: ProjectVi
       </div>
 
       {isMobile ? <div className="viewer-tabs" role="tablist" aria-label="Project viewer modes">
-        {(Object.keys(modeLabels2) as ViewerMode[]).map((viewerMode) => (
+        {(Object.keys(modeLabels2) as SuperViewerMode[]).map((viewerMode) => (
           <button
             key={viewerMode}
             type="button"
@@ -645,9 +644,9 @@ function ProjectCard({ project, large = false }: { project: ProjectData; large?:
             <span key={`${project.projectTitle}-${section}`}>{section}</span>
           ))}
         </div>
-        <a className="project-link" href={project.link} target="_blank" rel="noreferrer">
+        {project.link &&<a className="project-link" href={project.link} target="_blank" rel="noreferrer">
           Open project
-        </a>
+        </a>}
       </div>
     </div>
   );

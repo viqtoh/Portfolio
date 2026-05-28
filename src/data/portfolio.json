@@ -39,10 +39,10 @@
   "projects": [
 
     {
-      "projectTitle": "Document Management System",
+      "projectTitle": "Document Management System (Ginns Works",
       "sections": ["Django", "Pyantic", "Django Ninja","Backend Systems"],
       "link": "https://dms-api.apps.ginnsltd.com/v1/docs",
-      "summary": "Reusable CMS-driven frontend components with configurable content blocks, dynamic layouts, scoped styling, FAQs, pricing sections, testimonials, and flexible content management for non-technical teams.",
+      "summary": "Ginns Works is a Centralized document storage with version control, access management, and collaboration tools. It features Real-time tracking and monitoring of document status, approvals, and movements.",
       "year": "2024",
       "assets": [
         {
@@ -76,7 +76,7 @@
       "projectTitle": "Estefarya",
       "sections": ["Django", "Django CMS"],
       "link": "https://estefarya.com/en/",
-      "summary": "Reusable CMS-driven frontend components with configurable content blocks, dynamic layouts, scoped styling, FAQs, pricing sections, testimonials, and flexible content management for non-technical teams.",
+      "summary": "Estefarya is an Hair Transplant Clinic in Turkey. The website features reusable CMS-driven frontend components with configurable content blocks, dynamic layouts, scoped styling, FAQs, pricing sections, testimonials, and flexible content management for non-technical teams.",
       "year": "2025",
       "assets": [
         {
@@ -106,7 +106,7 @@
       "projectTitle": "Bulqe/IDMC",
       "sections": ["ReactJS", "TypeScript"],
       "link": "https://app.idmc.ai/",
-      "summary": "A marketplace platform for renting musical instruments with inventory management, product listings, booking workflows, customer interactions, and payment-ready architecture.",
+      "summary": "Bulqe is the product data layer where suppliers and stores connect, keep titles, prices and SKUs in sync across every CMS, and scale faster with AI‑assisted bulk editing. IDMC is the AI‑powered product information management system that helps brands and retailers keep their product data clean, consistent, and up to date across every channel. It features a user-friendly interface, secure authentication, real-time updates, and seamless integration with backend services to foster a supportive and interactive experience.",
       "year": "2026",
       "assets": [
         {
@@ -130,7 +130,7 @@
       "projectTitle": "WWPC",
       "sections": ["React Native", "TypeScript"],
       "link": "",
-      "summary": "A marketplace platform for renting musical instruments with inventory management, product listings, booking workflows, customer interactions, and payment-ready architecture.",
+      "summary": "When Wives Pray and Care (WWPC) is a community of Christian wives united in prayer, love, and sisterhood. The WWPC mobile app provides a platform for members to connect, share prayer requests and daily pills, access resources, and engage in spiritual growth together. It features a user-friendly interface, secure authentication, real-time updates, and seamless integration with backend services to foster a supportive and interactive community experience.",
       "year": "2025",
       "assets": [
         {
@@ -170,7 +170,7 @@
       "projectTitle": "Elevate",
       "sections": ["Flutter"],
       "link": "",
-      "summary": "A marketplace platform for renting musical instruments with inventory management, product listings, booking workflows, customer interactions, and payment-ready architecture.",
+      "summary": "A mobile application for financial management and loan services, featuring user-friendly interfaces, secure authentication, real-time data synchronization, and seamless integration with backend APIs for a smooth user experience. made for Elevate Alliance LTD a Nigerian microfinance bank focused on providing accessible financial solutions to individuals and businesses within Ondo State, Nigeria. manages loan applications, repayments, and financial tracking, and provides an investment platform.",
       "year": "2024",
       "assets": [
         {

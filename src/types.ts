@@ -52,3 +52,5 @@ export interface GalleryItem {
 }
 
 export type ViewerMode = 'book' | 'deck' | 'orbit' | 'cinema';
+
+export type SuperViewerMode = Exclude<ViewerMode, 'deck'>; 

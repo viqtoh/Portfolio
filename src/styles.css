@@ -1964,9 +1964,16 @@ pre {
     height: 42px;
   }
 }
-
+@media (min-width: 769px) {
+  .cinema-screen .media-asset {
+    max-height: calc(100vh - 300px) !important;
+  }
+}
 
 @media (max-width: 768px) {
+  .cinema-screen .media-asset {
+    max-height: calc(100vh - 500px) !important;
+  }
   .gallery-grid {
     display: flex;
     flex-direction: column;
@@ -1978,4 +1985,7 @@ pre {
 .viewer-tabs {
     position: static;
 }
+}
+.project-tags{
+  height: fit-content;
 }
