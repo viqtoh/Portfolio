@@ -943,6 +943,7 @@ pre {
     order: 3;
     width: 100%;
     overflow-x: auto;
+    justify-content: center;
   }
 
   .hero-section,
